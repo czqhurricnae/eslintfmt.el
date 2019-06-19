@@ -1,6 +1,10 @@
-;;; ESLINTFMT --- Format the javascript file in js2-mode.
+;;; eslintfmt.el --- Format the Javascript file with eslint in js2-mode.
 ;;
-;; Author: c <c@cdeMacBook-Air.local>
+;; Author: c
+;; Keywords: convenience tools extensions js javascript eslint
+;; Package-Version: 20190619.2318
+;; URL: https://github.com/czqhurricnae/eslintfmt.el
+;; Version: 0.1.0
 ;; Copyright © 2019, c, all rights reserved.
 ;; Created: 19 June 2019
 ;;
