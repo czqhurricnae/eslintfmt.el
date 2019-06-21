@@ -51,22 +51,32 @@
 
           (write-region nil nil tmpfile)
 
-          (setq our-command-args (append our-command-args
-                                         eslintfmt-command-args
-                                         (list "--fix" tmpfile)))
+          (setq our-command-args (mapconcat
+                                  (function (lambda (x) (format "%s" x)))
+                                  (append our-command-args
+                                          eslintfmt-command-args
+                                          (list "--fix" tmpfile))
+                                  " "))
 
           (message "Calling eslint: %s %s"
                    eslintfmt-command our-command-args)
 
-          (apply #'call-process-region (point-min) (point-max)
-                 eslintfmt-command nil nil nil our-command-args)
+          (apply #'call-process-region (list (point-min) (point-max)
+                                             "/bin/bash"
+                                             nil nil nil
+                                             "-c"
+                                             (concat
+                                              eslintfmt-command
+                                              " "
+                                              our-command-args)))
 
           (if (zerop (call-process-region (point-min) (point-max)
                                           "diff" nil patchbuf nil "-n" "-"
                                           tmpfile))
               (message "Buffer is already format.")
             (eslintfmt--apply-rcs-patch patchbuf)
-            (message "Applied format."))))
+            (with-current-buffer patchbuf
+              (message "Buffer already fixed in: /n%s" (buffer-string))))))
 
     (kill-buffer patchbuf)
     (delete-file tmpfile)))
