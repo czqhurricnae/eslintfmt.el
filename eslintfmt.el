@@ -15,7 +15,7 @@
 ;;; Code:
 (defgroup eslintfmt nil
   "Minor mode for formatting JavaScript buffers with eslint."
-  :link '(url-link "https://github.com/czqhurricane/eslintfmt.el")
+  :link '(url-link "https://github.com/czqhurricnae/eslintfmt.el")
   :group 'js)
 
 (defcustom eslintfmt-command "eslint"
